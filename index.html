@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadê Buffet?</title>
+</head>
+<body>
+    <div id ="app">
+        <main>
+            <h1>Bem-vindo ao Cadê Buffet?</h1>
+            <nav>
+                <input type = "text" v-model="searchBuffet" placeholder="Entre com um Buffet" >
+            </nav>
+            
+            <h2>Buffets</h2>
+
+            <section>
+                
+                <ul>
+                <li v-for = "buffet in buffets">
+
+                    <dl>
+                        <dt><a v-bind:href="`details_buffet.html?id=${buffet.id}`">{{ buffet.brand_name }}</a></dt>
+                            <dd>{{buffet.description }}</dd>
+                            <dd>{{ buffet.city }} - {{buffet.state}}</dd>
+                    </dl> 
+
+                </li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

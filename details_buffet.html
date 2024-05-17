@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id ="app"> 
+        <h2>Buffet {{buffet.brand_name}}</h2>
+       
+        <section>
+            <ul> 
+                <li><strong>Telefone para contato: </strong> {{ buffet.contact_phone }}</li>
+                <li><strong>E-mail para contato: </strong> {{ buffet.contact_email }}</li>
+                <li><strong>Endereço: </strong> {{ buffet.address }}</li>
+                <li><strong>Bairro: </strong> {{ buffet.district }}</li>
+                <li><strong>Estado: </strong> {{ buffet.state }}</li>
+                <li><strong>Cidade: </strong> {{ buffet.city }}</li>
+                <li><strong>CEP:</strong> {{ buffet.cep }}</li>
+                <li><strong>Descrição: </strong> {{ buffet.description }}</li>
+                <li>
+                    <strong>Meios de pagamentos:</strong>
+                    <ul>
+                        <template v-for="(value, method) in buffet.payment_method">
+                            <li v-if="value" :key="method">
+                                {{ method }}
+                            </li>
+                        </template>
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+                <strong>Eventos:</strong>
+                <ul>
+                    <li v-for="event in events" >
+                        <h4><a v-bind:href="`details_event.html?id=${event.id}`">{{ event.name }}</a></h4>
+                           
+                        <p><strong>{{ event.description }}</strong></p>
+                        <p><strong>Duração:</strong> {{ event.duration }} minutos</p>
+                        <p><strong>Mínimo de Convidados:</strong> {{ event.min_guests }}</p>
+                        <p><strong>Menu:</strong> {{ event.menu }}</p>
+                        <p><strong>Bebidas Alcoólicas:</strong> {{ event.alcoholic_beverages ? 'Sim' : 'Não' }}</p>
+                        <p><strong>Decoração:</strong> {{ event.decoration ? 'Sim' : 'Não' }}</p>
+                        <p><strong>Local do Evento:</strong> {{ event.event_location ? 'Sim' : 'Não' }}</p>
+                        <p><strong>Serviço de Estacionamento:</strong> {{ event.parking_service ? 'Sim' : 'Não' }}</p>
+                        <p><strong>Preço:</strong></p>
+                        <ul>
+                            <li><strong>Preço Base em Dias Úteis:</strong> {{ event.price.price_base_weekdays }}</li>
+                            <li><strong>Preço Adicional em Dias Úteis:</strong> {{ event.price.price_add_weekdays }}</li>
+                            <li><strong>Preço de Horas Extras em Dias Úteis:</strong> {{ event.price.price_overtime_weekdays }}</li>
+                            
+                        </ul>
+                        <p><strong>Consulta a disponibilidade para o evento</strong> </p>
+                        <div>
+                             
+                                <form @submit.prevent="() => checkAvailability(event.id)">
+                                    <div>
+                                        <label>Data do Evento:</label>
+                                        <input type="text" v-model="formData.date_event" placeholder="dd-mm-aaaa">
+                                    </div>
+                                    <div>
+                                        <label>Número de Convidados:</label>
+                                        <input type="number" v-model="formData.num_guests">
+                                    </div>
+                                    <button type="submit">Checar Disponibilidade</button>
+                                </form>
+                                <div v-if="response">
+                                    <pre>R$ {{ response }}</pre>
+                                </div>
+                             
+                            
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </ul>
+        </section>
+ 
+
+    </div>
+  
+      
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+      <script src="details_buffet.js"></script>
+
+</body>
+</html>

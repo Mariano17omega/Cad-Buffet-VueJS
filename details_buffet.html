@@ -58,16 +58,16 @@
                                 <form @submit.prevent="() => checkAvailability(event.id)">
                                     <div>
                                         <label>Data do Evento:</label>
-                                        <input type="text" v-model="formData.date_event" placeholder="dd-mm-aaaa">
+                                        <input type="text" v-model="formData.date_event" placeholder="dd-mm-aaaa" required>
                                     </div>
                                     <div>
                                         <label>Número de Convidados:</label>
-                                        <input type="number" v-model="formData.num_guests">
+                                        <input type="number" v-model="formData.num_guests" required>
                                     </div>
                                     <button type="submit">Checar Disponibilidade</button>
                                 </form>
                                 <div v-if="response">
-                                    <pre>R$ {{ response }}</pre>
+                                    <pre>{{ response }}</pre>
                                 </div>
                              
                             

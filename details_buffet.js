@@ -26,11 +26,17 @@ const app = Vue.createApp({
             this.formData.event_id = event_id;
 
             let response = await fetch( `http://127.0.0.1:3000/api/v1/events/availability?event_id=${this.formData.event_id}&date_event=${this.formData.date_event}&num_guests=${this.formData.num_guests}`);
-            console.log(JSON.stringify(response));
+            console.log(response.ok);
 
-            let data = await response.json();
-            this.response = data;
-        
+            if (!response.ok) {
+                let errorData = await response.json();
+                let errorMessage = Object.values(errorData.errors).join(', ');  
+                this.response = errorMessage; 
+            } else{
+                let data = await response.json();
+                this.response = `R$ ${data}`;
+            }
+    
         }
     },
     mounted() {

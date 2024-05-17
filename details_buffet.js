@@ -25,20 +25,12 @@ const app = Vue.createApp({
         async checkAvailability(event_id) {
             this.formData.event_id = event_id;
 
-            try {
-                let response = await fetch( 'http://127.0.0.1:3000/api/v1/events/availability?event_id=${this.formData.event_id}&date_event=#{this.formData.date_event}&num_guests=${this.formData.num_guests}');
+            let response = await fetch( `http://127.0.0.1:3000/api/v1/events/availability?event_id=${this.formData.event_id}&date_event=${this.formData.date_event}&num_guests=${this.formData.num_guests}`);
+            console.log(JSON.stringify(response));
 
-                if (!response.ok) {
-                    throw new Error('Erro na resposta do servidor');
-                }
-
-                let data = await response.json();
-                this.response = data;
-            } catch (error) {
-                console.error('Erro:', error);
-                console.log(JSON.stringify(this.formData));
-                this.response = JSON.stringify(this.response);
-            }
+            let data = await response.json();
+            this.response = data;
+        
         }
     },
     mounted() {

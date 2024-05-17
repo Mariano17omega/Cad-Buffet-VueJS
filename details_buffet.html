@@ -34,9 +34,9 @@
             <ul>
                 <strong>Eventos:</strong>
                 <ul>
-                    <li v-for="event in events" >
-                        <h4><a v-bind:href="`details_event.html?id=${event.id}`">{{ event.name }}</a></h4>
-                           
+                    <li v-for="event in events" > 
+                        
+                        <h3><strong>{{ event.name  }}</strong></h3>
                         <p><strong>{{ event.description }}</strong></p>
                         <p><strong>Duração:</strong> {{ event.duration }} minutos</p>
                         <p><strong>Mínimo de Convidados:</strong> {{ event.min_guests }}</p>
